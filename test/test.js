@@ -1,7 +1,7 @@
 
 var compiler = require('../lib/java_compiler');
 var executor = require('../lib/java_executor');
-var proxy    = require('../lib/java_debug_proxy').create_proxy();
+var jdp      = require('../lib/java_debug_proxy');
 
 var debug = true;
 
@@ -22,8 +22,7 @@ executor.find_port(function(port) {
     capture_error:  function(data) { console.log(data); } 
   });
 
-  console.log("started on post: " + port);
-
+  var proxy = jdp.create_proxy();
   proxy.listen(port);
 });
 
